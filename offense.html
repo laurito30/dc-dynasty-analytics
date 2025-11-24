@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DC Dynasty Baseball - Defensive Metrics</title>
+    <title>DC Dynasty Baseball - Offense Metrics</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Chart.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- External CSS -->
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Defensive Metrics Page Styles */
-        .defensive-metrics-page {
+        /* Offense Metrics Page Styles */
+        .offense-metrics-page {
             padding: 40px 20px;
             background-color: var(--color-secondary);
             min-height: 100vh;
         }
 
-        .defensive-metrics-page h1 {
+        .offense-metrics-page h1 {
             text-align: center;
             color: var(--color-primary);
             font-size: var(--font-size-h1);
@@ -31,6 +31,14 @@
             padding: 20px;
             border-radius: var(--border-radius);
             box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .average-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--color-primary);
         }
 
         /* Ensure canvas has height */
@@ -82,19 +90,19 @@
     </header>
 
     <main>
-        <h1>Defensive Metrics Averages</h1>
+        <h1>Offense Metrics Averages</h1>
 
         <div class="chart-container">
-            <canvas id="fieldingMechanicsChart"></canvas>
+            <div class="average-number" id="avgHittingPower"></div>
+            <canvas id="hittingPowerChart"></canvas>
         </div>
         <div class="chart-container">
-            <canvas id="fieldingArmStrengthChart"></canvas>
+            <div class="average-number" id="avgHittingContact"></div>
+            <canvas id="hittingContactChart"></canvas>
         </div>
         <div class="chart-container">
-            <canvas id="athleticismChart"></canvas>
-        </div>
-        <div class="chart-container">
-            <canvas id="throwingVelocityChart"></canvas>
+            <div class="average-number" id="avgExitSpeed"></div>
+            <canvas id="exitSpeedChart"></canvas>
         </div>
     </main>
 
@@ -112,32 +120,32 @@
         </div>
     </footer>
 
-<!-- Defensive Metrics JS -->
+<!-- Offensive Metrics JS -->
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <script>
-    // Defensive Metrics Data
-    const players = [
-        {position: "Catcher", fieldingMechanics:3, armStrength:2, athleticism:2, throwingVelocity:40.23},
-        {position: "Shortstop", fieldingMechanics:3, armStrength:2, athleticism:3, throwingVelocity:41.23},
-        {position: "Pitcher", fieldingMechanics:3, armStrength:2, athleticism:4, throwingVelocity:40.99},
-        {position: "Left Field", fieldingMechanics:5, armStrength:5, athleticism:5, throwingVelocity:56.3},
-        {position: "Catcher", fieldingMechanics:3, armStrength:5, athleticism:4, throwingVelocity:52},
-        {position: "Center Field", fieldingMechanics:1, armStrength:1, athleticism:2, throwingVelocity:32.34},
-        {position: "Right Field", fieldingMechanics:1, armStrength:4, athleticism:3, throwingVelocity:49.76},
-        {position: "Third Base", fieldingMechanics:4, armStrength:5, athleticism:5, throwingVelocity:57.87},
-        {position: "Shortstop", fieldingMechanics:5, armStrength:2, athleticism:4, throwingVelocity:41.76},
-        {position: "First Base", fieldingMechanics:3, armStrength:5, athleticism:5, throwingVelocity:62.21},
-        {position: "Second Base", fieldingMechanics:4, armStrength:2, athleticism:5, throwingVelocity:41.89},
-        {position: "Left Field", fieldingMechanics:5, armStrength:2, athleticism:5, throwingVelocity:51.78},
-        {position: "Pitcher", fieldingMechanics:3, armStrength:5, athleticism:4, throwingVelocity:71.76},
-        {position: "Third Base", fieldingMechanics:4, armStrength:2, athleticism:3, throwingVelocity:53.45},
-        {position: "Catcher", fieldingMechanics:1, armStrength:3, athleticism:2, throwingVelocity:74.6},
-        {position: "Center Field", fieldingMechanics:4, armStrength:5, athleticism:5, throwingVelocity:84.97},
-        {position: "Right Field", fieldingMechanics:2, armStrength:3, athleticism:2, throwingVelocity:72.87},
-        {position: "First Base", fieldingMechanics:3, armStrength:5, athleticism:4, throwingVelocity:94.8},
-        {position: "Shortstop", fieldingMechanics:2, armStrength:5, athleticism:3, throwingVelocity:93.32},
-        {position: "Second Base", fieldingMechanics:5, armStrength:5, athleticism:5, throwingVelocity:96.76},
-    ];
+    // Offensive Metrics Data
+   const players = [
+            {position:"Catcher", hittingPower:4, hittingContact:3, exitSpeed:51.56},
+            {position:"Shortstop", hittingPower:3, hittingContact:2, exitSpeed:50.56},
+            {position:"Pitcher", hittingPower:3, hittingContact:2, exitSpeed:49.56},
+            {position:"Left Field", hittingPower:5, hittingContact:5, exitSpeed:56.3},
+            {position:"Catcher", hittingPower:3, hittingContact:5, exitSpeed:49.51},
+            {position:"Center Field", hittingPower:1, hittingContact:1, exitSpeed:35.34},
+            {position:"Right Field", hittingPower:1, hittingContact:4, exitSpeed:38.34},
+            {position:"Third Base", hittingPower:4, hittingContact:5, exitSpeed:52.34},
+            {position:"Shortstop", hittingPower:5, hittingContact:2, exitSpeed:59},
+            {position:"First Base", hittingPower:3, hittingContact:5, exitSpeed:54.97},
+            {position:"Second Base", hittingPower:4, hittingContact:2, exitSpeed:56.98},
+            {position:"Left Field", hittingPower:5, hittingContact:2, exitSpeed:67.6},
+            {position:"Pitcher", hittingPower:3, hittingContact:5, exitSpeed:58.97},
+            {position:"Third Base", hittingPower:4, hittingContact:2, exitSpeed:62.98},
+            {position:"Catcher", hittingPower:1, hittingContact:3, exitSpeed:69.6},
+            {position:"Center Field", hittingPower:4, hittingContact:5, exitSpeed:81.97},
+            {position:"Right Field", hittingPower:2, hittingContact:3, exitSpeed:74.87},
+            {position:"First Base", hittingPower:3, hittingContact:5, exitSpeed:84.6},
+            {position:"Shortstop", hittingPower:2, hittingContact:5, exitSpeed:75.43},
+            {position:"Second Base", hittingPower:5, hittingContact:5, exitSpeed:93.98},
+        ];
 
     function average(array) {
         return array.reduce((sum, val) => sum + val, 0) / array.length;
@@ -152,10 +160,9 @@
         });
     }
 
-    const fieldingMechanicsData = getAvgByPosition("fieldingMechanics");
-    const fieldingArmStrengthData = getAvgByPosition("armStrength");
-    const athleticismData = getAvgByPosition("athleticism");
-    const throwingVelocityData = getAvgByPosition("throwingVelocity");
+     const hittingPowerData = getAvgByPosition("hittingPower");
+        const hittingContactData = getAvgByPosition("hittingContact");
+        const exitSpeedData = getAvgByPosition("exitSpeed");
 
     function createChart(canvasId, label, data) {
         const ctx = document.getElementById(canvasId).getContext('2d');
@@ -191,11 +198,11 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-        createChart('fieldingMechanicsChart', 'Avg Fielding Mechanics', fieldingMechanicsData);
-        createChart('fieldingArmStrengthChart', 'Avg Fielding Arm Strength', fieldingArmStrengthData);
-        createChart('athleticismChart', 'Avg Athleticism', athleticismData);
-        createChart('throwingVelocityChart', 'Avg Throwing Velocity', throwingVelocityData);
-    });
+    // Create charts
+            createChart('hittingPowerChart','Avg Hitting Power',hittingPowerData);
+            createChart('hittingContactChart','Avg Hitting Contact',hittingContactData);
+            createChart('exitSpeedChart','Avg Exit Speed',exitSpeedData);
+        });
 </script>
 </body>
 </html>

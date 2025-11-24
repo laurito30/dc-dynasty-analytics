@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DC Dynasty Baseball - Running Metrics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Running Metrics Page Styles */
+        .running-metrics-page {
+            padding: 40px 20px;
+            background-color: var(--color-secondary);
+            min-height: 100vh;
+        }
+
+        .running-metrics-page h1 {
+            text-align: center;
+            color: var(--color-primary);
+            font-size: var(--font-size-h1);
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--color-text-light);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Ensure canvas has height */
+        .chart-container canvas {
+            width: 100% !important;
+            height: 350px !important;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                width: 95%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="running-metrics-page">
+
+    <!-- Header -->
+    <header>
+        <div class="header">
+            <img class="logo" src="images/dcdynasty.webp" alt="logo" width="75" height="75">
+            <h1 class="title">Baseball Analytics</h1>
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="lessons.html">Private Lessons</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Metrics ▼</button>
+                    <div class="dropdown-content">
+                        <a href="offense.html">Hitting Metrics</a>
+                        <a href="defense.html">Defense Metrics</a>
+                        <a href="running.html">Running Metrics</a>
+                    </div>
+                </div> 
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Running Metrics Averages</h1>
+
+        <div class="chart-container">
+            <canvas id="sixtyYardDashChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="speedRatingChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="runningMechanicsChart"></canvas>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <img class="logo" src="images/dcdynastyproperty.jpg" alt="logo" width="75" height="75">
+        <p>Head Administrator: Brian Laurito<br>
+           <a href="mailto:blaurito@dcdynasty.com">blaurito@dcdynasty.com</a>
+        </p>
+        <div class="footer-buttons-container">
+            <button type="button" class="footer-button" onclick="window.location.href='contactus.html'">Contact Us</button>
+            <button type="button" class="footer-button" onclick="window.location.href='privacy.html'">Privacy Policy</button>
+            <button type="button" class="footer-button" onclick="window.location.href='terms.html'">Terms of Service</button>
+            <button type="button" class="footer-button" onclick="window.location.href='careers.html'">Careers</button>
+        </div>
+    </footer>
+
+    <!-- Running Metrics JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script>
+        const players = [
+            {position:"Catcher", sixty:9.5, speed:5, mechanics:5},
+            {position:"Shortstop", sixty:10.24, speed:5, mechanics:4},
+            {position:"Pitcher", sixty:12.23, speed:2, mechanics:2},
+            {position:"Left Field", sixty:9.23, speed:5, mechanics:5},
+            {position:"Catcher", sixty:14.23, speed:2, mechanics:1},
+            {position:"Center Field", sixty:10.95, speed:3, mechanics:3},
+            {position:"Right Field", sixty:10.89, speed:4, mechanics:3},
+            {position:"Third Base", sixty:8.94, speed:5, mechanics:5},
+            {position:"Shortstop", sixty:10.25, speed:5, mechanics:2},
+            {position:"First Base", sixty:7.89, speed:3, mechanics:5},
+            {position:"Second Base", sixty:8.69, speed:2, mechanics:4},
+            {position:"Left Field", sixty:9.25, speed:5, mechanics:2},
+            {position:"Pitcher", sixty:7.5, speed:3, mechanics:5},
+            {position:"Third Base", sixty:8.54, speed:5, mechanics:3},
+            {position:"Catcher", sixty:8.4, speed:1, mechanics:2},
+            {position:"Center Field", sixty:7.1, speed:4, mechanics:5},
+            {position:"Right Field", sixty:8.1, speed:1, mechanics:2},
+            {position:"First Base", sixty:6.89, speed:4, mechanics:5},
+            {position:"Shortstop", sixty:7.35, speed:3, mechanics:3},
+            {position:"Second Base", sixty:6.56, speed:5, mechanics:5}
+        ];
+
+        const positions = [...new Set(players.map(p=>p.position))];
+
+        function average(arr) {
+            return arr.reduce((sum, val)=>sum+val,0)/arr.length;
+        }
+
+        function getAvgByPosition(metric) {
+            return positions.map(pos => {
+                const vals = players.filter(p=>p.position===pos).map(p=>p[metric]);
+                return average(vals);
+            });
+        }
+
+        const sixtyData = getAvgByPosition("sixty");
+        const speedData = getAvgByPosition("speed");
+        const mechanicsData = getAvgByPosition("mechanics");
+
+        function createChart(canvasId,label,data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: { labels: positions, datasets:[{
+                    label: label,
+                    data: data,
+                    backgroundColor: 'rgba(42, 150, 255, 0.7)',
+                    borderColor: 'rgba(42, 150, 255, 1)',
+                    borderWidth: 1
+                }]},
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: { enabled: true },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'end',
+                            color: '#000',
+                            font: { weight:'bold', size:14 },
+                            formatter: function(value){ return value.toFixed(2); }
+                        }
+                    },
+                    scales: { y: { beginAtZero:true } }
+                },
+                plugins: [ChartDataLabels]
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded',()=>{
+            createChart('sixtyYardDashChart','Avg 60 Yard Dash',sixtyData);
+            createChart('speedRatingChart','Avg Speed Rating',speedData);
+            createChart('runningMechanicsChart','Avg Running Mechanics',mechanicsData);
+        });
+    </script>
+
+</body>
+</html>
