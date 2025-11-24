@@ -466,3 +466,36 @@ footer p {
 .lessons-form button:hover {
     background-color: hsl(256, 76%, 35%);
 }
+/* Defensive Metrics Page Styles */
+.defensive-metrics-page {
+    padding: 40px 20px;
+    background-color: var(--color-secondary);
+    min-height: 100vh;
+}
+
+.defensive-metrics-page h1 {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: var(--font-size-h1);
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    width: 80%;
+    max-width: 100%;
+    margin: 40px auto;
+    height: 550px;
+    background: var(--color-text-light);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Optional: responsive adjustments */
+@media (max-width: 768px) {
+    .chart-container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+}
