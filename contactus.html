@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DC Dynasty Baseball - Contact Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZPCLC3WLQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZPCLC3WLQ');
+</script>
+</head>
+<body>
+<header>
+    <div class="header">
+        <img class="logo" src="images/dcdynasty.webp" alt="DC Dynasty Logo" width="75" height="75"/>
+        <h1 class="title">Contact Us</h1>
+        <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="#lessons">Private Lessons</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Metrics ▼</button>
+                    <div class="dropdown-content">
+                        <a href="#">Hitting Metrics</a>
+                        <a href="#">Throwing Metrics</a>
+                        <a href="#">Running Metrics</a>
+                        <a href="#">Fielding Metrics</a>
+                    </div>
+                </div> 
+            </nav>
+    </div>
+</header>
+
+<main>
+    <section class="contact-section" style="text-align:center; padding: 60px 20px; background: var(--color-secondary);">
+        <h2>Get in Touch</h2>
+        <p>Have questions or comments? Send us a message!</p>
+
+        <form action="mailto:laurito@cua.edu" method="post" enctype="text/plain" style="max-width:600px; margin: 0 auto;">
+            <label for="name" style="display:block; margin-bottom:8px; font-weight:bold;">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required
+                   style="width:100%; padding:10px; margin-bottom:20px; border-radius:8px; border:1px solid #ccc;">
+
+            <label for="email" style="display:block; margin-bottom:8px; font-weight:bold;">Your Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required
+                   style="width:100%; padding:10px; margin-bottom:20px; border-radius:8px; border:1px solid #ccc;">
+
+            <label for="message" style="display:block; margin-bottom:8px; font-weight:bold;">Your Message:</label>
+            <textarea id="message" name="message" rows="6" placeholder="Type your message here..." required
+                      style="width:100%; padding:10px; margin-bottom:20px; border-radius:8px; border:1px solid #ccc;"></textarea>
+
+            <button type="submit" 
+                    style="padding:12px 30px; background-color: var(--color-primary); color: var(--color-text-light); font-weight:bold; border:none; border-radius:25px; cursor:pointer;">
+                Send Message
+            </button>
+        </form>
+    </section>
+</main>
+<!-- Footer -->
+    <footer>
+      <!-- left side-->
+      <img class="logo" src="images/dcdynastyproperty.jpg" alt="logo" width="75" height="75">
+      <!-- center side -->      
+      <p>Head Administrator: Brian Laurito<br>
+            <a href="mailto:blaurito@dcdynasty.com">blaurito@dcdynasty.com</a></p>
+  
+<div class="footer-buttons-container">
+    <button type="button" class="footer-button" onclick="window.location.href='contactus.html'">Contact Us</button>
+    <button type="button" class="footer-button" onclick="window.location.href='privacy.html'">Privacy Policy</button>
+    <button type="button" class="footer-button" onclick="window.location.href='terms.html'">Terms of Service</button>
+    <button type="button" class="footer-button" onclick="window.location.href='careers.html'">Careers</button>
+  </div>
+    </footer>
+</body>
+</html>
