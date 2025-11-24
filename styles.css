@@ -417,3 +417,52 @@ footer p {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
+/* Private Lessons Page Styles */
+.lessons-section {
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-secondary);
+    border-radius: 12px;
+}
+
+.lessons-section h2 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 25px;
+}
+
+.lessons-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lessons-form label {
+    font-weight: bold;
+}
+
+.lessons-form input, 
+.lessons-form select, 
+.lessons-form textarea {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.lessons-form button {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.lessons-form button:hover {
+    background-color: hsl(256, 76%, 35%);
+}
